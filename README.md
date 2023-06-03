@@ -5,6 +5,7 @@
 * TypeScript
 * Prisma
 * MySQL
+* BCrypt
   
 
 ### Criei este projeto para aprender o básico do NestJS com auxílio da documentação, o projeto consiste em um CRUD simples. Criando, atualizando, lendo e deletando usuário. Criei uma única tabela no banco de dados para isso, para facilitar o aprendizado do framework.
