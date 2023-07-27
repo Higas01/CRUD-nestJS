@@ -17,12 +17,9 @@ import { UserMiddleware } from './user.middleware';
 })
 export class userModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(UserMiddleware)
-      .exclude(
-        { path: '/', method: RequestMethod.GET },
-        { path: '/create', method: RequestMethod.POST },
-      )
-      .forRoutes(userController);
+    consumer.apply(UserMiddleware).forRoutes({
+      path: '/:id',
+      method: RequestMethod.ALL,
+    });
   }
 }

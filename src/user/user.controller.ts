@@ -4,17 +4,17 @@ import {
   Delete,
   Get,
   HttpCode,
-  HttpException,
   Param,
   ParseIntPipe,
   Post,
   Put,
   Res,
 } from '@nestjs/common';
-import { createUserDTO } from 'src/dto/createUser.dto';
+import { createUserDTO } from '../dto/createUser.dto';
 import { userService } from './user.service';
-import { updateUserDTO } from 'src/dto/updateUser.dto';
+import { updateUserDTO } from '../dto/updateUser.dto';
 import { Response } from '@nestjs/common';
+import { response } from 'express';
 
 @Controller()
 export class userController {
@@ -24,7 +24,7 @@ export class userController {
   @Post('create')
   async createUser(
     @Body() { name, email, password }: createUserDTO,
-    @Res() res: Response,
+    @Res() res?: Response,
   ) {
     return this.user.createUser({ name, email, password }, res);
   }

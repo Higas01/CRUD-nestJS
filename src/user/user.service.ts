@@ -1,8 +1,8 @@
 import { HttpException, Injectable, HttpStatus, Res } from '@nestjs/common';
-import { createUserDTO } from 'src/dto/createUser.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { createUserDTO } from '../dto/createUser.dto';
+import { PrismaService } from '../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
-import { updateUserDTO } from 'src/dto/updateUser.dto';
+import { updateUserDTO } from '../dto/updateUser.dto';
 
 @Injectable()
 export class userService {
@@ -20,7 +20,7 @@ export class userService {
         },
       });
 
-      res.status(201).json(data);
+      return res.status(201).json(data);
     } catch (error) {
       res
         .json(500)
@@ -30,7 +30,13 @@ export class userService {
 
   async getUsers() {
     try {
-      return this.prisma.user.findMany();
+      return this.prisma.user.findMany({
+        select: {
+          id: true,
+          name: true,
+          email: true,
+        },
+      });
     } catch (error) {
       throw new HttpException(
         'Ocorreu algum erro, tente novamente mais tarde',
